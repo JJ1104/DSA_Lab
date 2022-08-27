@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void getMatrixElements(int matrix[][10], int row, int column) {
+void read(int matrix[][10], int row, int column) {
 
    int i, j;
    for (i = 0; i < row; i++) {
@@ -31,6 +31,16 @@ void multiplyMatrices(int first[][10],
    }
 }
 
+void display(int matrix[][10],int row,int column){
+   int i, j;
+   for (i = 0; i < row; i++) {
+      for (j = 0; j < column; j++) {
+         printf("%d ", matrix[i][j]);
+      }
+      printf("\n");
+   }
+}
+
 int main() {
    
    int first[10][10], second[10][10], result[10][10], r1, c1, r2, c2, i, j;
@@ -48,20 +58,22 @@ int main() {
    }
 
    printf("Enter the first matrix elements:\n"); 
-   getMatrixElements(first, r1, c1);
+   read(first, r1, c1);
    
    printf("Enter the second matrix elements:\n"); 
-   getMatrixElements(second, r2, c2);
+   read(second, r2, c2);
    
    multiplyMatrices(first, second, result, r1, c1, r2, c2);
+
+   printf("First Matrix:\n");
+   display(first,r1,c1);
+   printf("\n");
+   printf("Second Matrix:\n");
+   display(second,r2,c2);
+   printf("\n");
    
    printf("After multiplying the matrices, the resulting product matrix is:\n");
-   for(i=0;i<r1;i++){
-    for(j=0;j<c2;j++){
-        printf("%d ",result[i][j]);
-    }
-    printf("\n");
-   }
-   
+   display(result,r1,c2);
+
    return 0;
 }
