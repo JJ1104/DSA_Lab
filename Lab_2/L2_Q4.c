@@ -54,13 +54,13 @@ int main() {
       scanf("%d %d", &r2, &c2);
    }
 
-   int** first = (int**)calloc(r1,sizeof(int));
+   int** first = (int**)calloc(r1,sizeof(int*));
    for (i = 0; i < r1; i++)
         first[i] = (int*)calloc(c1,sizeof(int));
-   int** second = (int**)calloc(r2,sizeof(int));
+   int** second = (int**)calloc(r2,sizeof(int*));
    for (i = 0; i < r2; i++)
         second[i] = (int*)calloc(c2,sizeof(int));
-   int** result = (int**)calloc(r1,sizeof(int));
+   int** result = (int**)calloc(r1,sizeof(int*));
    for (i = 0; i < r1; i++)
         result[i] = (int*)calloc(c2,sizeof(int));
     
