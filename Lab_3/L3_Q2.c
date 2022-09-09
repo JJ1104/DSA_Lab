@@ -1,53 +1,59 @@
 #include<stdio.h>
-
-typedef struct Student
+#include<stdlib.h>
+typedef struct 
 {
 	char name[20];
 	int rollno;
 	float cgpa;
 }Student;
 
-void sortrollno(Student Sarr[],int n){
+void sortrollno(Student *ptr,int n){
 	int i,j;
-	Student temp;
-	for(i=0;i<n;i++){
-		for(j=0;j<n-i-1;j++){
-			if(Sarr[j].rollno>Sarr[j+1].rollno){
-				temp = Sarr[j+1];
-				Sarr[j+1] = Sarr[j];
-				Sarr[j] = temp;
-			}
-		}
-	}
+    Student t;
+    for (i = 0; i < n; i++) {
+ 
+        for (j = i + 1; j < n; j++) {
+ 
+            if ((ptr + j)->rollno < (ptr + i)->rollno) {
+ 
+                t = *(ptr + i);
+                *(ptr + i) = *(ptr + j);
+                *(ptr + j) = t;
+            }
+        }
+    }
 }
 
 
 int main(){
 	
 	int n,i;
+    Student *ptr;
 	printf("Enter the number of students: ");
 	scanf("%d",&n);
 	Student Sarr[n];
-	for(i=0;i<n;i++){
-		printf("Enter the name of Student %d: ",i+1);
-		scanf("%s",Sarr[i].name);
-		printf("Enter the Rollno of Student %d: ",i+1);
-		scanf("%d",&Sarr[i].rollno);
-		printf("Enter the CGPA of Student %d: ",i+1);
-		scanf("%f",&Sarr[i].cgpa);
-		printf("\n");
-	}
-	//Displaying one student object
-	printf("Name of Student 1 is %s\n",Sarr[0].name);
-	printf("Rollno of Student 1 is %d\n",Sarr[0].rollno);
-	printf("CGPA of Student 1 is %.1f\n",Sarr[0].cgpa);
+    // Memory allocation 
+  ptr = (Student *)malloc(n * sizeof(Student));
+  for (int i = 0; i < n; ++i) {
+    printf("Enter name,roll no. and cgpa:\n");
+    scanf("%s %d %f", (ptr+i)->name, &(ptr + i)->rollno ,&(ptr+i)->cgpa);
+  }
+  printf("Displaying Information:\n");
+  for (int i = 0; i < n; ++i) {
+    printf("%s\t%d\t%f", (ptr + i)->name, (ptr + i)->rollno,(ptr+i)->cgpa);
+    printf("\n");
+  }
 
-	sortrollno(Sarr,n);
+	printf("Name of Student 1 is %s\n",ptr->name);
+	printf("Rollno of Student 1 is %d\n",ptr->rollno);
+	printf("CGPA of Student 1 is %.1f\n",ptr->cgpa);
+
+	sortrollno(ptr,n);
 	printf("\nAfter Sorting:\n");
 	for(i=0;i<n;i++){
-		printf("Name of Student %d is %s\n",i+1,Sarr[i].name);
-		printf("Rollno of Student %d is %d\n",i+1,Sarr[i].rollno);
-		printf("CGPA of Student %d is %.1f\n",i+1,Sarr[i].cgpa);
+		printf("Name of Student %d is %s\n",i+1,(ptr+i)->name);
+		printf("Rollno of Student %d is %d\n",i+1,(ptr+i)->rollno);
+		printf("CGPA of Student %d is %.1f\n",i+1,(ptr+i)->cgpa);
 		printf("\n");
 	}
 	return 0;
