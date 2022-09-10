@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 typedef struct{
     char name[20];
@@ -6,14 +7,12 @@ typedef struct{
         int day;
         int month;
         int year;
-    };
-    struct date d1;
+    }d1;
     struct address{
         int houseno;
         int zip;
         char state[20];
-    };
-    struct address addr;
+    }addr;
 }Employee;
 
 
@@ -22,7 +21,7 @@ int main(){
     printf("Enter the number of employees:\n");
     scanf("%d",&n);
     Employee *ptremp;
-    Employee Emparr[n];
+    Employee *Emparr = (Employee*) malloc(n*sizeof(Employee));
     ptremp = Emparr;
     // Reading
     for(i=0;i<n;i++){

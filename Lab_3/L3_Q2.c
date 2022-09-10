@@ -31,7 +31,6 @@ int main(){
     Student *ptr;
 	printf("Enter the number of students: ");
 	scanf("%d",&n);
-	Student Sarr[n];
     // Memory allocation 
   ptr = (Student *)malloc(n * sizeof(Student));
   for (int i = 0; i < n; ++i) {
