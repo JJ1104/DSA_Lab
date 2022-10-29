@@ -1,52 +1,46 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
-#include<ctype.h>
-#include "SStringoperations.c"
-
-void reverse(char str[]){
-    char temp;
-    int n =strlen(str);
-    for(int i=0;i<n/2;i++){
-        temp = str[i];
-        str[i] = str[n-i-1];
-        str[n-i-1] = temp;
-    }
+#include<stdlib.h>
+# define MAX 20
+char str[MAX],stack[MAX];
+int top=-1;
+void push(char c)
+{
+   stack[++top]=c;
 }
-
-int main(){
-    STACK *ps,s;
-    ps = &s;
-    char prefix[30];
-    char *e,x;
-    printf("Enter the prefix expression: ");
-    scanf("%s",prefix);
-    ps->capacity = 10;
-    ps->stack = (char**)malloc(ps->capacity*sizeof(char*));
-    for(int i=0;i<10;i++){
-        ps->stack[i] = (char*)malloc(10*sizeof(char));
-    }
-    ps->top = -1;
-    reverse(prefix);
-    e = prefix;
-    char exp[10];
-    while(*e != '\0'){
-        if(isalnum(*e)){
-            exp[0]=*e;
-            exp[1]='\0';
-            push(ps,exp);
+char pop()
+{
+   return stack[top--];
+}
+void pre_post()
+{
+   int n,i,j=0; char c[20];
+   char a,b,op;
+   printf("Enter the prefix expression\n");
+   gets(str);
+   n=strlen(str);
+   for(i=0;i<MAX;i++)
+   stack[i]='\0';
+   printf("Postfix expression is:\n");
+   for(i=0;i<n;i++)
+   {
+      if(str[i]=='+'||str[i]=='-'||str[i]=='*'||str[i]=='/')
+      {
+         push(str[i]);
+      }
+      else
+      { c[j++]=str[i];
+        while((top!=-1)&&(stack[top]=='$'))
+        {
+            a=pop(); c[j++]=pop();
         }
-        else{
-            char* op1 = pop(ps);
-            char* op2 = pop(ps);
-            strcat(op1,op2);
-            exp[0] =*e;
-            exp[1] ='\0';
-            strcat(op1,exp);
-            push(ps,op1);
-            }
-        e++;
-        }
-
-    printf("%s",pop(ps));
+        push('$');
+      }
+   }
+   c[j]='\0';
+   printf("%s",c);
+}
+void main()
+{
+    pre_post();
 }
