@@ -20,3 +20,7 @@ void push(Stack* s,Node x){
 Node pop(Stack* s){
     return s->nodestack[s->top--];
 }
+
+Node top(Stack* s){
+    return s->nodestack[s->top];
+}

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "Stack.c"
+#include "Queue.c"
 
 typedef struct BST* Node;
 
@@ -104,11 +105,47 @@ void iterative_preorder(Node root){
 
 //Using Single Stack
 void iterative_postorder(Node root){
-
+    Stack *ps,s;
+    ps = &s;
+    ps->top = -1;
+    Node curr = root;
+    Node prev = NULL;
+    while(curr != NULL || !(isEmpty(ps))){
+        if(curr){
+            push(ps,curr);
+            curr = curr->Lchild;
+        }
+        else{
+            curr = top(ps);
+            if(curr->Rchild == NULL || curr->Rchild == prev){
+                printf("%d ",curr->data);
+                pop(ps);
+                prev = curr;
+                curr = NULL;
+            }
+            else    
+                curr = curr->Rchild;
+        }
+    }
 }
 
 void level_order(Node root){
-    
+    Queue *pq,q;
+    pq = &q;
+    pq->front = pq->rear = -1;
+    Node curr = root;
+    enqueue(pq,curr);
+    while(!(isQEmpty(pq))){
+        curr = dequeue(pq);
+        printf("%d ",curr->data);
+
+        if(curr->Lchild){
+            enqueue(pq,curr->Lchild);
+        }
+        if(curr->Rchild){
+            enqueue(pq,curr->Rchild);
+        }
+    }
 }
 
   
