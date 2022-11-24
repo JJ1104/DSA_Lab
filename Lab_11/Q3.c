@@ -1,18 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "Stack.c"
-
-typedef struct BST* Node;
-
-typedef struct BST{
-    char data;
-    Node Rchild, Lchild;
-}BST;
-
-Node getnode(){
-    Node temp = (Node)malloc(sizeof(BST));
-    return temp;
-}
+#include "Tree.c"
 
 void create_exp_tree(Node* root,char postfix[]){
     Stack *ps,s;

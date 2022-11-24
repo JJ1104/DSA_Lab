@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-typedef struct BST* Node;
+typedef struct BT* Node;
 
 typedef struct Stack{
     int top;

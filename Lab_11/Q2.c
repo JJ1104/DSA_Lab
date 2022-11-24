@@ -2,49 +2,7 @@
 #include<stdlib.h>
 #include "Stack.c"
 #include "Queue.c"
-
-typedef struct BST* Node;
-
-typedef struct BST{
-    int data;
-    Node Rchild, Lchild;
-}BST;
-
-Node getnode(){
-    Node temp = (Node)malloc(sizeof(BST));
-    return temp;
-}
-
-void insert(Node* root,int val){
-    Node temp = getnode();
-    Node head = *root;
-    Node parent = NULL;
-    temp->data = val;
-    temp->Rchild = temp->Lchild = NULL;
-
-    if(head == NULL){
-        head = temp;
-        *root = head;
-        return ;
-    }
-
-    while(head != NULL){
-        parent = head;
-        if(val > head->data){
-            head = head->Rchild;
-        }
-        else{
-            head = head->Lchild;
-        }
-    }
-    if(val > parent->data){
-        parent->Rchild = temp;
-    }
-    else{
-        parent->Lchild = temp;
-    }
-    return;
-}
+#include "Tree.c"
 
 void iterative_inorder(Node root){
     Stack *ps,s;
@@ -151,11 +109,7 @@ void level_order(Node root){
   
 int main(){
     Node Tree = NULL;
-    insert(&Tree,3);
-    insert(&Tree,1);
-    insert(&Tree,2);
-    insert(&Tree,4);
-    insert(&Tree,5);
+    create_BT(&Tree);
     printf("Inorder : ");
     iterative_inorder(Tree);
     printf("\nPreorder : ");
